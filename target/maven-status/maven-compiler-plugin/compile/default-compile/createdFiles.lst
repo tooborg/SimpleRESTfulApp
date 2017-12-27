@@ -1,10 +1,5 @@
 classes\ResourceAssembler.class
 classes\IdGenerator.class
 classes\InMemoryRepository.class
-classes\OrderResource.class
 classes\Application.class
-classes\OrderResourceAssembler.class
 classes\Identifiable.class
-classes\OrderController.class
-classes\OrderRepository.class
-classes\Order.class

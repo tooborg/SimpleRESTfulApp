@@ -2,12 +2,19 @@ package classes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public abstract class InMemoryRepository<T extends Identifiable> {
+
+    static private User juha = new User()
+            .setName("Juha Christensen")
+            .setAge(38)
+            .setComplete(true);
+
+    static private User mike = new User()
+            .setName("Michael Shraybman")
+            .setAge(35)
+            .setComplete(true);
 
     @Autowired
     private IdGenerator idGenerator;
@@ -51,4 +58,8 @@ public abstract class InMemoryRepository<T extends Identifiable> {
     }
 
     protected abstract void updateIfExist(T original, T updated);
+
+    public void setElements(List<T> elements) {
+        this.elements = Collections.synchronizedList(elements);
+    }
 }

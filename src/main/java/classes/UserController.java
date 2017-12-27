@@ -12,52 +12,52 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
-@ExposesResourceFor(Order.class)
-@RequestMapping(value = "/order", produces = "application/json")
-public class OrderController {
+@ExposesResourceFor(User.class)
+@RequestMapping(value = "/users", produces = "application/json")
+public class UserController {
 
     @Autowired
-    private OrderRepository repository;
+    private UserRepository repository;
 
     @Autowired
-    private OrderResourceAssembler assembler;
+    private UserResourceAssembler assembler;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Collection<OrderResource>> findAllOrders() {
-        List<Order> orders = repository.findAll();
-        return new ResponseEntity<>(assembler.toResourceCollection(orders), HttpStatus.OK);
+    public ResponseEntity<Collection<UserResource>> findAllOrders() {
+        List<User> users = repository.findAll();
+        return new ResponseEntity<>(assembler.toResourceCollection(users), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity<OrderResource> createOrder(@RequestBody Order order) {
-        Order createOrder = repository.create(order);
-        return new ResponseEntity<>(assembler.toResource(createOrder), HttpStatus.CREATED);
+    public ResponseEntity<UserResource> createUser(@RequestBody User user) {
+        User createUser = repository.create(user);
+        return new ResponseEntity<>(assembler.toResource(createUser), HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<OrderResource> findOrderById(@PathVariable Long id) {
-        Optional<Order> order = repository.findById(id);
+    public ResponseEntity<UserResource> findUserById(@PathVariable Long id) {
+        Optional<User> user = repository.findById(id);
 
-        if (order.isPresent()) {
-            return new ResponseEntity<>(assembler.toResource(order.get()), HttpStatus.OK);
+        if (user.isPresent()) {
+            return new ResponseEntity<>(assembler.toResource(user.get()), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deleteOrder(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         boolean wasDeleted = repository.delete(id);
         HttpStatus responseStatus = wasDeleted ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND;
         return new ResponseEntity<>(responseStatus);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json")
-    public ResponseEntity<OrderResource> updateOrder(@PathVariable Long id, @RequestBody Order updatedOrder) {
-        boolean wasUpdated = repository.update(id, updatedOrder);
+    public ResponseEntity<UserResource> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+        boolean wasUpdated = repository.update(id, updatedUser);
 
         if (wasUpdated) {
-            return findOrderById(id);
+            return findUserById(id);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

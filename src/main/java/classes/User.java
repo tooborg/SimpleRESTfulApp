@@ -1,10 +1,10 @@
 package classes;
 
-public class Order implements Identifiable {
+public class User implements Identifiable {
 
     private Long id;
-    private String description;
-    private long costInCents;
+    private String name;
+    private long age;
     private boolean isComplete;
 
     @Override
@@ -17,24 +17,27 @@ public class Order implements Identifiable {
         return id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public User setName(String name) {
+        this.name = name;
+        return this;
     }
 
-    public void setCostInCents(long costInCents) {
-        this.costInCents = costInCents;
+    public User setAge(long age) {
+        this.age = age;
+        return this;
     }
 
-    public long getCostInCents() {
-        return costInCents;
+    public long getAge() {
+        return age;
     }
 
-    public void setComplete(boolean isComplete) {
+    public User setComplete(boolean isComplete) {
         this.isComplete = isComplete;
+        return this;
     }
 
     public void markComplete() {

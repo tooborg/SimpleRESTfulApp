@@ -6,7 +6,7 @@ import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
 
 @Component
-public class OrderResourceAssembler extends ResourceAssembler<Order, OrderResource> {
+public class UserResourceAssembler extends ResourceAssembler<User, UserResource> {
 
     @Autowired
     private EntityLinks entityLinks;
@@ -15,14 +15,15 @@ public class OrderResourceAssembler extends ResourceAssembler<Order, OrderResour
     private static final String DELETE_REL = "delete";
 
     @Override
-    public OrderResource toResource(Order order) {
-        OrderResource resource = new OrderResource(order);
+    public UserResource toResource(User user) {
+        UserResource resource = new UserResource(user);
 
-        final Link selfLink = entityLinks.linkToSingleResource(order);
+        final Link selfLink = entityLinks.linkToSingleResource(user);
 
-        resource.add(selfLink.withSelfRel());
-        resource.add(selfLink.withRel(UPDATE_REL));
-        resource.add(selfLink.withRel(DELETE_REL));
+//      Enable _links
+//        resource.add(selfLink.withSelfRel());
+//        resource.add(selfLink.withRel(UPDATE_REL));
+//        resource.add(selfLink.withRel(DELETE_REL));
 
         return resource;
     }
